@@ -1,0 +1,171 @@
+1) string manipulation program 
+=================================
+import java.io.*; 
+import java.util.*; 
+class OccurenceOfCharInString { 
+	static void characterCount(String inputString) 
+	{ 
+		// Creating a HashMap containing char 
+		// as a key and occurrences as a value 
+		HashMap<Character, Integer> charCountMap 
+			= new HashMap<Character, Integer>(); 
+
+		// Converting given string to char array 
+
+		char[] strArray = inputString.toCharArray(); 
+
+		// checking each char of strArray 
+		for (char c : strArray) { 
+			if (charCountMap.containsKey(c)) { 
+
+				// If char is present in charCountMap, 
+				// incrementing it's count by 1 
+				charCountMap.put(c, charCountMap.get(c) + 1); 
+			} 
+			else { 
+
+				// If char is not present in charCountMap, 
+				// putting this char to charCountMap with 1 as it's value 
+				charCountMap.put(c, 1); 
+			} 
+		} 
+
+		// Printing the charCountMap 
+		for (Map.Entry entry : charCountMap.entrySet()) { 
+			System.out.println(entry.getKey() + " " + entry.getValue()); 
+		} 
+	} 
+
+	// Driver Code 
+	public static void main(String[] args) 
+	{ 
+		String str = "aabccd"; 
+		characterCount(str); 
+	} 
+} 
+
+Question:2
+============
+Find out the shortest array and its length from the the array group.
+ 
+class GFG { 
+
+	static final int N = 5; 
+
+	// array for storing the current index of list i 
+	static int ptr[] = new int[501]; 
+
+	// This function takes an k sorted lists in the form of 
+	// 2D array as an argument. It finds out smallest range 
+	// that includes elements from each of the k lists. 
+	static void findSmallestRange(int arr[][], int n, int k) 
+	{ 
+		int i, minval, maxval, minrange, minel = 0, maxel = 0, flag, minind; 
+
+		// initializing to 0 index; 
+		for (i = 0; i <= k; i++) { 
+			ptr[i] = 0; 
+		} 
+
+		minrange = Integer.MAX_VALUE; 
+
+		while (true) { 
+			// for mainting the index of list containing the minimum element 
+			minind = -1; 
+			minval = Integer.MAX_VALUE; 
+			maxval = Integer.MIN_VALUE; 
+			flag = 0; 
+
+			// iterating over all the list 
+			for (i = 0; i < k; i++) { 
+				// if every element of list[i] is traversed then break 
+
+the loop 
+				if (ptr[i] == n) { 
+					flag = 1; 
+					break; 
+				} 
+				// find minimum value among all the list elements 
+
+pointing by the ptr[] array 
+				if (ptr[i] < n && arr[i][ptr[i]] < minval) { 
+					minind = i; // update the index of the list 
+					minval = arr[i][ptr[i]]; 
+				} 
+				// find maximum value among all the list elements 
+
+pointing by the ptr[] array 
+				if (ptr[i] < n && arr[i][ptr[i]] > maxval) { 
+					maxval = arr[i][ptr[i]]; 
+				} 
+			} 
+
+			// if any list exhaust we will not get any better answer, so 
+
+break the while loop 
+			if (flag == 1) { 
+				break; 
+			} 
+
+			ptr[minind]++; 
+
+			// updating the minrange 
+			if ((maxval - minval) < minrange) { 
+				minel = minval; 
+				maxel = maxval; 
+				minrange = maxel - minel; 
+			} 
+		} 
+		System.out.printf("The smallest range is [%d, %d]\n", minel, maxel); 
+	} 
+
+	// Driver program to test above function 
+	public static void main(String[] args) 
+	{ 
+
+		int arr[][] = { 
+			{ 4, 7, 9, 12, 15 }, 
+			{ 0, 8, 10, 14, 20 }, 
+			{ 6, 12, 16, 30, 50 } 
+		}; 
+
+		int k = arr.length; 
+
+		findSmallestRange(arr, N, k); 
+	} 
+} 
+
+Question:4
+============
+Print Pascal Triangle program 
+
+import java.io.*; 
+
+class GFG { 
+	public static void main (String[] args) { 
+		int n = 4; 
+		printPascal(n); 
+	} 
+
+public static void printPascal(int n) 
+{ 
+// An auxiliary array to store generated pascal triangle values 
+int[][] arr = new int[n][n]; 
+
+// Iterate through every line and print integer(s) in it 
+for (int line = 0; line < n; line++) 
+{ 
+	// Every line has number of integers equal to line number 
+	for (int i = 0; i <= line; i++) 
+	{ 
+	// First and last values in every row are 1 
+	if (line == i || i == 0) 
+		arr[line][i] = 1; 
+	else // Other values are sum of values just above and left of above 
+		arr[line][i] = arr[line-1][i-1] + arr[line-1][i]; 
+	System.out.print(arr[line][i]); 
+	} 
+	System.out.println(""); 
+} 
+} 
+} 
